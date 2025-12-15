@@ -9,7 +9,7 @@ const Index = () => {
     minutes: 0,
     seconds: 0,
   });
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(true); // TODO: Change back to false before Dec 24
   const [letterOpened, setLetterOpened] = useState(false);
 
   const targetDate = new Date("2025-12-24T00:00:00");
