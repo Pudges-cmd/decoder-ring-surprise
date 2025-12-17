@@ -57,7 +57,7 @@ const Index = () => {
     if (currentParagraph === 4) {
       const timer = setTimeout(() => {
         setCurrentParagraph(5);
-      }, 3000);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [currentParagraph]);
