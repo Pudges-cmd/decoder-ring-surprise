@@ -9,7 +9,7 @@ const Index = () => {
     minutes: 0,
     seconds: 0,
   });
-  const [isUnlocked, setIsUnlocked] = useState(false); // TODO: Change back to false before Dec 24
+  const [isUnlocked, setIsUnlocked] = useState(true); // TODO: Change back to false before Dec 24
   const [letterOpened, setLetterOpened] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
 
@@ -44,12 +44,26 @@ const Index = () => {
   const letterParagraphs = [
     "To start this off I'd like to greet you a Happy Birthday first and a Merry Christmas. I pray for more birthdays and holidays to come in your future.",
     "You definitely know who I am by now. If not, I'm the one from the room next to yours with the bad haircut, also I'm the one that sent you that embarrassing message to you that one time. Yeah, its that one.",
-    "To not, beat around the bush, I like you. I don't mind not having it reciprocated, I just want to tell you that myself, and honestly it being your birthday and the holidays at the same time helped push me to it.",
-    "You've honestly been an inspiration for me, and I hope you know that I think your honestly a cool and great person. To conclude, I just wanted to greet you, and I hope that you have a great rest of your day. I'm not expecting to come from this, but I was hoping to be your friend from now on."
+    "I've been contemplating doing something like this, and I'm going for it because why not, I think that you're awesome, and deserve something like this.",
+    "To not, beat around the bush, I like you. I don't mind not having it reciprocated, The point of this is that I just want to tell you that myself. And......",
+    "To ask if pwede ba manligaw?",
+    "I'm joking, HAHAHAHAH, I'm sorry. I'm not even allowed to have a GF yet eh. Really though, I just want to tell you how I feel.",
+    "You've honestly been a great motivation for me, and I'd be glad to better get to know you and to start that, I'd like to formally ask to be your friend :)",
+    "Once again, Happy Birthday, I hope you appreciate this and feel free to message me naman if you need to talk to anyone or help sa school (I think I'm smart enough to help anyways). Have a great rest of your day Mary!"
   ];
 
+  // Auto-advance after the "manligaw" joke paragraph (index 4) after 3 seconds
+  useEffect(() => {
+    if (currentParagraph === 4) {
+      const timer = setTimeout(() => {
+        setCurrentParagraph(5);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentParagraph]);
+
   const handleNextParagraph = () => {
-    if (currentParagraph < letterParagraphs.length) {
+    if (currentParagraph < letterParagraphs.length - 1) {
       setCurrentParagraph(prev => prev + 1);
     }
   };
@@ -276,8 +290,8 @@ const Index = () => {
                       transition={{ delay: 0.5 }}
                       className="mt-12 text-right border-t border-pink-200/50 pt-8"
                     >
-                      <p className="text-pink-400 italic text-lg font-medium">With warmth,</p>
-                      <p className="text-pink-500 font-script text-4xl mt-2">Guian</p>
+                      <p className="text-pink-400 italic text-lg font-medium">From:</p>
+                      <p className="text-pink-500 font-script text-4xl mt-2">Guian Beriso</p>
                     </motion.div>
 
                     <motion.div
