@@ -9,7 +9,7 @@ const Index = () => {
     minutes: 0,
     seconds: 0,
   });
-  const [isUnlocked, setIsUnlocked] = useState(true); // Preview mode - set to false to re-enable countdown
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
   const [greetingRead, setGreetingRead] = useState(false);
@@ -59,7 +59,7 @@ const Index = () => {
     if (currentParagraph === 3) {
       const timer = setTimeout(() => {
         setCurrentParagraph(4);
-      }, 3000);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [currentParagraph]);
