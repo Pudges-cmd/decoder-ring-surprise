@@ -12,6 +12,7 @@ const Index = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
+  const [greetingRead, setGreetingRead] = useState(false);
 
   const targetDate = new Date("2025-12-24T00:00:00");
 
@@ -115,66 +116,109 @@ const Index = () => {
 
       <AnimatePresence mode="wait">
         {!isUnlocked ? (
-          <motion.div
-            key="locked"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="text-center z-10"
-          >
+          !greetingRead ? (
             <motion.div
-              animate={{ 
-                scale: [1, 1.08, 1],
-                rotate: [0, 3, -3, 0]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
+              key="greeting"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="text-center z-10 max-w-lg"
             >
-              <Gift className="w-24 h-24 mx-auto text-pink-400 mb-8 drop-shadow-lg" />
+              <motion.div
+                animate={{ 
+                  y: [0, -10, 0],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <Sparkles className="w-16 h-16 mx-auto text-pink-400 mb-6 drop-shadow-lg" />
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="bg-white/60 backdrop-blur-md rounded-3xl p-8 shadow-xl shadow-pink-200/40 border border-pink-100 mb-8"
+              >
+                <p className="text-pink-600/90 text-lg md:text-xl leading-relaxed font-medium">
+                  Hi! So, thanks for checking, still not time for it though.
+                </p>
+              </motion.div>
+              
+              <motion.button
+                onClick={() => setGreetingRead(true)}
+                className="bg-gradient-to-r from-pink-300 to-rose-300 text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-pink-200/50"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                See countdown~
+              </motion.button>
             </motion.div>
-            
-            <h1 className="text-4xl md:text-5xl font-script text-pink-500 mb-4 drop-shadow-sm">
-              Something Special Awaits~
-            </h1>
-            <p className="text-pink-400 mb-12 text-lg font-medium tracking-wide">
-              Opens on December 24th ✨
-            </p>
-
-            <div className="flex gap-3 md:gap-5 justify-center mb-10">
-              {[
-                { label: "Days", value: timeLeft.days },
-                { label: "Hours", value: timeLeft.hours },
-                { label: "Mins", value: timeLeft.minutes },
-                { label: "Secs", value: timeLeft.seconds },
-              ].map((item) => (
-                <motion.div
-                  key={item.label}
-                  className="bg-white/60 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-xl shadow-pink-200/40 min-w-[70px] md:min-w-[100px] border border-pink-100"
-                  whileHover={{ scale: 1.08, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <motion.span
-                    key={item.value}
-                    initial={{ scale: 1.3, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="block text-3xl md:text-5xl font-bold text-pink-500 font-cute"
-                  >
-                    {String(item.value).padStart(2, "0")}
-                  </motion.span>
-                  <span className="text-xs md:text-sm text-pink-400 uppercase tracking-widest font-semibold">
-                    {item.label}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.p 
-              className="text-pink-300 text-sm font-medium"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
+          ) : (
+            <motion.div
+              key="locked"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="text-center z-10"
             >
-              Be patient~ good things take time ♪
-            </motion.p>
-          </motion.div>
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.08, 1],
+                  rotate: [0, 3, -3, 0]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <Gift className="w-24 h-24 mx-auto text-pink-400 mb-8 drop-shadow-lg" />
+              </motion.div>
+              
+              <h1 className="text-4xl md:text-5xl font-script text-pink-500 mb-4 drop-shadow-sm">
+                Something Special Awaits~
+              </h1>
+              <p className="text-pink-400 mb-12 text-lg font-medium tracking-wide">
+                Opens on December 24th ✨
+              </p>
+
+              <div className="flex gap-3 md:gap-5 justify-center mb-10">
+                {[
+                  { label: "Days", value: timeLeft.days },
+                  { label: "Hours", value: timeLeft.hours },
+                  { label: "Mins", value: timeLeft.minutes },
+                  { label: "Secs", value: timeLeft.seconds },
+                ].map((item) => (
+                  <motion.div
+                    key={item.label}
+                    className="bg-white/60 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-xl shadow-pink-200/40 min-w-[70px] md:min-w-[100px] border border-pink-100"
+                    whileHover={{ scale: 1.08, y: -5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <motion.span
+                      key={item.value}
+                      initial={{ scale: 1.3, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      className="block text-3xl md:text-5xl font-bold text-pink-500 font-cute"
+                    >
+                      {String(item.value).padStart(2, "0")}
+                    </motion.span>
+                    <span className="text-xs md:text-sm text-pink-400 uppercase tracking-widest font-semibold">
+                      {item.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.p 
+                className="text-pink-300 text-sm font-medium"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                Be patient~ good things take time ♪
+              </motion.p>
+            </motion.div>
+          )
         ) : (
           <motion.div
             key="unlocked"
