@@ -9,7 +9,7 @@ const Index = () => {
     minutes: 0,
     seconds: 0,
   });
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(true); // Preview mode - set to false to re-enable countdown
   const [letterOpened, setLetterOpened] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
   const [greetingRead, setGreetingRead] = useState(false);
@@ -43,22 +43,23 @@ const Index = () => {
   }, []);
 
   const letterParagraphs = [
-    "To start this off I'd like to greet you a Happy Birthday first and a Merry Christmas. I pray for more birthdays and holidays to come in your future.",
-    "You definitely know who I am by now. If not, I'm the one from the room next to yours with the bad haircut, also I'm the one that sent you that embarrassing message to you that one time. Yeah, its that one.",
-    "I've been contemplating doing something like this, and I'm going for it because why not, I think that you're awesome, and deserve something like this.",
-    "To not, beat around the bush, I like you. I don't mind not having it reciprocated, The point of this is that I just want to tell you that myself. And......",
-    "To ask if pwede ba manligaw?",
-    "I'm joking, HAHAHAHAH, I'm sorry. I'm not even allowed to have a GF yet eh. Really though, I just want to tell you how I feel.",
-    "You've honestly been a great motivation for me, and I'd be glad to better get to know you and to start that, I'd like to formally ask to be your friend :)",
-    "Once again, Happy Birthday, I hope you appreciate this and feel free to message me naman if you need to talk to anyone or help sa school (I think I'm smart enough to help anyways). Have a great rest of your day Mary!"
+    "To start this off, I'd like to greet you with a Happy Birthday and a Merry Christmas. I pray for more birthdays and holidays to come in your future.",
+    "You know who I am now. If not, I'm the one from the room next to yours with the bad haircut, also I'm the one that sent you that embarrassing message that one time. Yeah, its that one. Honestly, I don't know what got over me that I managed to message you then, but I'd like to apologize for how sudden that was.",
+    "Anyways, to not, beat around the bush, I like you. Also, I wanted to ask...",
+    "If pwede ba manligaw?",
+    "HAHAHAHHA Ang corny, sorry, I was joking, it's a bit too early for me to do that na diba? Really, though, I just want you to know that I admire you a lot.",
+    "I don't understand it myself. I guess one day, I just started to notice you despite never really knowing you. And, when people found out that I liked you, I started hearing more about you, and all of that made me like you even more.",
+    "Honestly, I just wanted to tell you myself that I liked you. Ang boring naman if narinig mo lang sa iba and not from me diba?",
+    "Theres so much I'd like to say, but I don't want this to be overwhelming. So, I'll end it like this. I'd be glad to get the chance to better get to know you better and to start that, I'd like to formally ask to be your friend :)",
+    "Once again, Happy Birthday, I hope you appreciate this and not find this weird. I'm not expecting to have anything reciprocated, I just wanted to take the chance to say what I feel and tell you that I think you're an amazing person. I'd love to hear a response if you have one. Thanks for taking the time to read and have a great rest of your day, Mary!"
   ];
 
-  // Auto-advance after the "manligaw" joke paragraph (index 4) after 3 seconds
+  // Auto-advance after the "manligaw" joke paragraph (index 3) after 3 seconds
   useEffect(() => {
-    if (currentParagraph === 4) {
+    if (currentParagraph === 3) {
       const timer = setTimeout(() => {
-        setCurrentParagraph(5);
-      }, 1000);
+        setCurrentParagraph(4);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [currentParagraph]);
