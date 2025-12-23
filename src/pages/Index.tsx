@@ -9,8 +9,8 @@ const Index = () => {
     minutes: 0,
     seconds: 0,
   });
-  const [isUnlocked, setIsUnlocked] = useState(false);
-  const [showPresentAnimation, setShowPresentAnimation] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(true); // Preview mode
+  const [showPresentAnimation, setShowPresentAnimation] = useState(true); // Preview mode
   const [presentOpened, setPresentOpened] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
