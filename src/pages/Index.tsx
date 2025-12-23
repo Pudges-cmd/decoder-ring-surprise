@@ -142,7 +142,7 @@ const Index = () => {
                 className="bg-white/60 backdrop-blur-md rounded-3xl p-8 shadow-xl shadow-pink-200/40 border border-pink-100 mb-8"
               >
                 <p className="text-pink-600/90 text-lg md:text-xl leading-relaxed font-medium">
-                  Good afternoon! I saw you visited kanina, anyways happy one day before your birthday!
+                  Good evening, I saw you visited kanina, super lapit na oh, happy birthday in advance na HAHAHHA.
                 </p>
               </motion.div>
               
