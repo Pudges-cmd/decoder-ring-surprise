@@ -9,7 +9,7 @@ const Index = () => {
     minutes: 0,
     seconds: 0,
   });
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(true); // Preview mode
   const [letterOpened, setLetterOpened] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
   const [greetingRead, setGreetingRead] = useState(false);
