@@ -10,9 +10,10 @@ const Index = () => {
     seconds: 0,
   });
   const [isUnlocked, setIsUnlocked] = useState(false);
+  const [showPresentAnimation, setShowPresentAnimation] = useState(false);
+  const [presentOpened, setPresentOpened] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
-  const [greetingRead, setGreetingRead] = useState(false);
 
   const targetDate = new Date("2025-12-24T00:00:00");
 
@@ -23,6 +24,7 @@ const Index = () => {
 
       if (difference <= 0) {
         setIsUnlocked(true);
+        setShowPresentAnimation(true);
         return { days: 0, hours: 0, minutes: 0, seconds: 0 };
       }
 
@@ -63,6 +65,10 @@ const Index = () => {
       return () => clearTimeout(timer);
     }
   }, [currentParagraph]);
+
+  const handleOpenPresent = () => {
+    setPresentOpened(true);
+  };
 
   const handleNextParagraph = () => {
     if (currentParagraph < letterParagraphs.length - 1) {
@@ -117,114 +123,179 @@ const Index = () => {
 
       <AnimatePresence mode="wait">
         {!isUnlocked ? (
-          !greetingRead ? (
+          <motion.div
+            key="locked"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="text-center z-10"
+          >
             <motion.div
-              key="greeting"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="text-center z-10 max-w-lg"
+              animate={{ 
+                scale: [1, 1.08, 1],
+                rotate: [0, 3, -3, 0]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
             >
-              <motion.div
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [0, 5, -5, 0]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <Sparkles className="w-16 h-16 mx-auto text-pink-400 mb-6 drop-shadow-lg" />
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="bg-white/60 backdrop-blur-md rounded-3xl p-8 shadow-xl shadow-pink-200/40 border border-pink-100 mb-8"
-              >
-                <p className="text-pink-600/90 text-lg md:text-xl leading-relaxed font-medium">
-                  Good evening, I saw you visited kanina, super lapit na oh, happy birthday in advance na HAHAHHA.
-                </p>
-              </motion.div>
-              
-              <motion.button
-                onClick={() => setGreetingRead(true)}
-                className="bg-gradient-to-r from-pink-300 to-rose-300 text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-pink-200/50"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-              >
-                See countdown~
-              </motion.button>
+              <Gift className="w-24 h-24 mx-auto text-pink-400 mb-8 drop-shadow-lg" />
             </motion.div>
-          ) : (
-            <motion.div
-              key="locked"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="text-center z-10"
-            >
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.08, 1],
-                  rotate: [0, 3, -3, 0]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <Gift className="w-24 h-24 mx-auto text-pink-400 mb-8 drop-shadow-lg" />
-              </motion.div>
-              
-              <h1 className="text-4xl md:text-5xl font-script text-pink-500 mb-4 drop-shadow-sm">
-                Something Special Awaits~
-              </h1>
-              <p className="text-pink-400 mb-12 text-lg font-medium tracking-wide">
-                Opens on December 24th ✨
-              </p>
+            
+            <h1 className="text-4xl md:text-5xl font-script text-pink-500 mb-4 drop-shadow-sm">
+              Something Special Awaits~
+            </h1>
+            <p className="text-pink-400 mb-12 text-lg font-medium tracking-wide">
+              Opens on December 24th ✨
+            </p>
 
-              <div className="flex gap-3 md:gap-5 justify-center mb-10">
-                {[
-                  { label: "Days", value: timeLeft.days },
-                  { label: "Hours", value: timeLeft.hours },
-                  { label: "Mins", value: timeLeft.minutes },
-                  { label: "Secs", value: timeLeft.seconds },
-                ].map((item) => (
-                  <motion.div
-                    key={item.label}
-                    className="bg-white/60 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-xl shadow-pink-200/40 min-w-[70px] md:min-w-[100px] border border-pink-100"
-                    whileHover={{ scale: 1.08, y: -5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+            <div className="flex gap-3 md:gap-5 justify-center mb-10">
+              {[
+                { label: "Days", value: timeLeft.days },
+                { label: "Hours", value: timeLeft.hours },
+                { label: "Mins", value: timeLeft.minutes },
+                { label: "Secs", value: timeLeft.seconds },
+              ].map((item) => (
+                <motion.div
+                  key={item.label}
+                  className="bg-white/60 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-xl shadow-pink-200/40 min-w-[70px] md:min-w-[100px] border border-pink-100"
+                  whileHover={{ scale: 1.08, y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <motion.span
+                    key={item.value}
+                    initial={{ scale: 1.3, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="block text-3xl md:text-5xl font-bold text-pink-500 font-cute"
                   >
-                    <motion.span
-                      key={item.value}
-                      initial={{ scale: 1.3, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      className="block text-3xl md:text-5xl font-bold text-pink-500 font-cute"
-                    >
-                      {String(item.value).padStart(2, "0")}
-                    </motion.span>
-                    <span className="text-xs md:text-sm text-pink-400 uppercase tracking-widest font-semibold">
-                      {item.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
+                    {String(item.value).padStart(2, "0")}
+                  </motion.span>
+                  <span className="text-xs md:text-sm text-pink-400 uppercase tracking-widest font-semibold">
+                    {item.label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
 
-              <motion.p 
-                className="text-pink-300 text-sm font-medium"
-                animate={{ opacity: [0.5, 1, 0.5] }}
+            <motion.p 
+              className="text-pink-300 text-sm font-medium"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              Be patient~ good things take time ♪
+            </motion.p>
+          </motion.div>
+        ) : showPresentAnimation && !presentOpened ? (
+          <motion.div
+            key="present-animation"
+            className="text-center z-10 flex flex-col items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.5 }}
+          >
+            {/* Sparkle burst effect */}
+            {[...Array(12)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ 
+                  scale: [0, 1, 0],
+                  opacity: [0, 1, 0],
+                  x: Math.cos((i * 30 * Math.PI) / 180) * 150,
+                  y: Math.sin((i * 30 * Math.PI) / 180) * 150,
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  delay: 0.5,
+                  repeat: Infinity,
+                  repeatDelay: 2
+                }}
+              >
+                <Sparkles className="text-pink-400" size={20} />
+              </motion.div>
+            ))}
+
+            {/* Present box */}
+            <motion.div
+              className="relative cursor-pointer"
+              onClick={handleOpenPresent}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {/* Present lid */}
+              <motion.div
+                className="relative z-10"
+                animate={{ 
+                  y: [0, -8, 0],
+                  rotate: [0, -3, 3, 0]
+                }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                Be patient~ good things take time ♪
-              </motion.p>
+                {/* Bow */}
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20">
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <div className="relative">
+                      <div className="w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full shadow-lg" />
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-pink-300 rounded-full" />
+                      {/* Bow loops */}
+                      <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-8 h-6 bg-gradient-to-r from-rose-400 to-pink-400 rounded-full transform -rotate-12" />
+                      <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-8 h-6 bg-gradient-to-l from-rose-400 to-pink-400 rounded-full transform rotate-12" />
+                    </div>
+                  </motion.div>
+                </div>
+                
+                {/* Lid top */}
+                <div className="w-44 h-8 bg-gradient-to-b from-pink-400 to-pink-500 rounded-t-xl shadow-lg mx-auto relative">
+                  <div className="absolute inset-x-0 top-0 h-2 bg-pink-300/50 rounded-t-xl" />
+                </div>
+              </motion.div>
+              
+              {/* Present box body */}
+              <motion.div 
+                className="w-40 h-32 bg-gradient-to-b from-pink-400 via-pink-500 to-rose-500 rounded-xl shadow-2xl mx-auto relative overflow-hidden"
+                animate={{ 
+                  boxShadow: [
+                    "0 20px 60px -15px rgba(244, 114, 182, 0.5)",
+                    "0 30px 80px -15px rgba(244, 114, 182, 0.7)",
+                    "0 20px 60px -15px rgba(244, 114, 182, 0.5)",
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                {/* Ribbon vertical */}
+                <div className="absolute left-1/2 -translate-x-1/2 w-6 h-full bg-gradient-to-b from-rose-300 to-rose-400" />
+                {/* Ribbon horizontal */}
+                <div className="absolute top-1/2 -translate-y-1/2 w-full h-6 bg-gradient-to-r from-rose-300 via-rose-400 to-rose-300" />
+                {/* Shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+              </motion.div>
             </motion.div>
-          )
+
+            <motion.p
+              className="text-pink-500 text-xl font-medium mt-10"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              Tap to open your present!
+            </motion.p>
+            
+            <motion.div
+              className="mt-4"
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
+              <Sparkles className="text-pink-400" size={24} />
+            </motion.div>
+          </motion.div>
         ) : (
           <motion.div
             key="unlocked"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 200 }}
             className="w-full max-w-2xl z-10"
           >
             {!letterOpened ? (
