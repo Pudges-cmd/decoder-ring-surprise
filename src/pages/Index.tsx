@@ -47,19 +47,19 @@ const Index = () => {
     "You know who I am now. If not, I'm the one from the room next to yours with the bad haircut, also I'm the one that sent you that embarrassing message that one time. Yeah, its that one. Honestly, I don't know what got over me that I managed to message you then, but I'd like to apologize for how sudden that was.",
     "Anyways, to not, beat around the bush, I like you. Also, I wanted to ask...",
     "If pwede ba manligaw?",
-    "HAHAHAHHA Ang corny, sorry, I was joking, it's a bit too early for me to do that na diba? Really, though, I just want you to know that I admire you a lot.",
-    "I don't understand it myself. I guess one day, I just started to notice you despite never really knowing you. And, when people found out that I liked you, I started hearing more about you, and all of that made me like you even more.",
+    "HAHAHAHHA Ang corny, sorry poo, I was joking, it's a bit too early for me to do that diba? Really, though, I just want you to know that I admire you a lot.",
+    "I don't understand it myself. I guess one day, I just started to notice you despite never really knowing you. You caught my eye, and it wasn't fleeting. A day passed, a week and nothing changed, I really had developed a crush for you. And, when people found out that I liked you, I started hearing more about you, and all of that made me like you even more.",
     "Honestly, I just wanted to tell you myself that I liked you. Ang boring naman if narinig mo lang sa iba and not from me diba?",
-    "Theres so much I'd like to say, but I don't want this to be overwhelming. So, I'll end it like this. I'd be glad to get the chance to better get to know you better and to start that, I'd like to formally ask to be your friend :)",
-    "Once again, Happy Birthday, I hope you appreciate this and not find this weird. I'm not expecting to have anything reciprocated, I just wanted to take the chance to say what I feel and tell you that I think you're an amazing person. I'd love to hear a response if you have one. Thanks for taking the time to read and have a great rest of your day, Mary!"
+    "Theres so much I'd like to say. How amazing your music taste is, how you somehow radiate a kind and warm aura around you, but I don't want this to be overwhelming. So, I'll end it like this. I'd be glad to get the chance to better get to know you better and to start that, I'd like to formally ask to be your friend :)",
+    "Once again, Happy Birthday, I hope you appreciate this and not find this weird. I'm not expecting to have anything reciprocated, I just wanted to take the chance to say what I feel and tell you that I think you're an amazing person. I'd love to hear a response if you have one. Thanks for taking the time to read and have a great rest of your Birthday Day, Mary!"
   ];
 
-  // Auto-advance after the "manligaw" joke paragraph (index 3) after 3 seconds
+  // Auto-advance after the "manligaw" joke paragraph (index 3) after 1.5 seconds
   useEffect(() => {
     if (currentParagraph === 3) {
       const timer = setTimeout(() => {
         setCurrentParagraph(4);
-      }, 1000);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [currentParagraph]);
