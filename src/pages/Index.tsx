@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Star, Gift } from "lucide-react";
+import { Snowflake, TreePine, Star, Mail } from "lucide-react";
 
 const Index = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -10,12 +10,12 @@ const Index = () => {
     seconds: 0,
   });
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const [showPresentAnimation, setShowPresentAnimation] = useState(false);
-  const [presentOpened, setPresentOpened] = useState(false);
-  const [letterOpened, setLetterOpened] = useState(false);
+  const [showLetterAnimation, setShowLetterAnimation] = useState(false);
+  const [envelopeOpened, setEnvelopeOpened] = useState(false);
+  const [letterRevealed, setLetterRevealed] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
 
-  const targetDate = new Date("2025-12-24T00:00:00");
+  const targetDate = new Date("2025-12-25T00:00:00");
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -24,7 +24,7 @@ const Index = () => {
 
       if (difference <= 0) {
         setIsUnlocked(true);
-        setShowPresentAnimation(true);
+        setShowLetterAnimation(true);
         return { days: 0, hours: 0, minutes: 0, seconds: 0 };
       }
 
@@ -45,17 +45,22 @@ const Index = () => {
   }, []);
 
   const letterParagraphs = [
-    "To start this off, I'd like to greet you with a Happy Birthday and a Merry Christmas. I pray for more birthdays and holidays to come in your future.",
-    "You know who I am now. If not, I'm the one from the room next to yours with the bad haircut, also I'm the one that sent you that embarrassing message that one time. Yeah, its that one. Honestly, I don't know what got over me that I managed to message you then, but I'd like to apologize for how sudden that was.",
-    "Anyways, to not, beat around the bush, I like you.",
-    "I don't understand it myself. I guess one day, I just started to notice you despite never really knowing you. You caught my eye, and it wasn't fleeting. A day passed, a week and nothing changed, I really had developed a massive crush for you. And, when people found out that I liked you, I started hearing more about you, and all of that made me like you even more.",
-    "Honestly, I just wanted to tell you myself that I liked you. Ang boring naman if narinig mo lang sa iba and not from me diba?",
-    "Theres so much I'd like to say. How amazing your music taste is, how you radiate a kindness that feels genuinely warm, but I don't want this to be overwhelming. So, I'll end it like this. I'd be glad to get the chance to better get to know you better and to start that, I'd like to formally ask to be your friend :)",
-    "Once again, Happy Birthday, I hope you appreciate this and not find this weird. I'm not expecting to have anything reciprocated, I just wanted to take the chance to say what I feel and tell you that I think you're an amazing person. I'd love to hear a response if you have one. Thanks for taking the time to read and have a great rest of your Birthday Mary!"
+    "Hi again! Last time was a Happy Birthday. This time it's Merry Christmas.",
+    "I hope you had a great Birthday and had a fun time with your family! It was your Birthday after all you deserve to enjoy every bit of it :)",
+    "With that being said I think I have to apologize. I didn't mean for it to be overwhelming for you.",
+    "I know that you're having a hard time responding and I get that. Having feelings like this thrown onto you can be a lot, and it was never my intention for you to stress over this.",
+    "I came into doing this because I wanted to tell you how I feel. It's a weird thing don't you think? Theres no metric for this kind of thing, all I really have to go by is how I feel and I can tell you from that is what I feel is genuine.",
+    "I guess what I wanted to say is that, with whatever you respond with let it be true to you. Whether you decide to be friends or not, I respect it either way. Your feelings matters to me more than any specific answer.",
+    "I know it's awkward, I went at it pretty backwards nga eh. Diba dapat friends muna before confession HAHHAHHA? I think we agree that its too early for anything more than that, and honestly, I was waiting for college or even farther than that before I pursue anything like that.",
+    "But the idea of sitting idly and doing nothing felt like it was gnawing at me. I guess the mere thought of letting an opportunity like this slide is enough to push me into doing all of this. Going for it and confessing felt terrifying, but the thought of looking back and regretting not doing anything when I had the chance felt all the more heavier.",
+    "What matters to me is that whatever happens next feels comfortable and honest for you. If in the future, being friends is where this stays for you, then I'd still genuinely appreciate that. I value you as a person and not as just a \"what could be\".",
+    "It was never my intention to pressure you into a response, so don't feel the need to rush into one, just say what you truly want to say. Be it tomorrow or soon, I'll patiently wait if you do have a response :)",
+    "Enjoy your Christmas!"
   ];
 
-  const handleOpenPresent = () => {
-    setPresentOpened(true);
+  const handleOpenEnvelope = () => {
+    setEnvelopeOpened(true);
+    setTimeout(() => setLetterRevealed(true), 800);
   };
 
   const handleNextParagraph = () => {
@@ -64,55 +69,66 @@ const Index = () => {
     }
   };
 
+  // Generate snowflakes
+  const snowflakes = [...Array(50)].map((_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 10,
+    duration: 10 + Math.random() * 10,
+    size: 4 + Math.random() * 8,
+  }));
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-pink-100 flex flex-col items-center justify-center p-6 relative overflow-hidden font-cute">
-      {/* Soft gradient overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-200/30 via-transparent to-transparent pointer-events-none" />
-      
-      {/* Floating decorations */}
+    <div className="min-h-screen bg-gradient-to-b from-[hsl(var(--christmas-dark))] via-[hsl(150,35%,10%)] to-[hsl(150,40%,6%)] flex flex-col items-center justify-center p-6 relative overflow-hidden font-cute">
+      {/* Snowfall */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            initial={{ 
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000), 
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800) 
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              rotate: [0, 360],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut",
-            }}
+        {snowflakes.map((flake) => (
+          <div
+            key={flake.id}
+            className="absolute animate-snowfall text-[hsl(var(--snow))]"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${flake.left}%`,
+              animationDelay: `${flake.delay}s`,
+              animationDuration: `${flake.duration}s`,
+              fontSize: `${flake.size}px`,
             }}
           >
-            {i % 4 === 0 ? (
-              <Sparkles className="text-pink-300/50" size={16 + Math.random() * 10} />
-            ) : i % 4 === 1 ? (
-              <Star className="text-rose-300/40" size={12 + Math.random() * 8} />
-            ) : i % 4 === 2 ? (
-              <div className="w-2 h-2 rounded-full bg-pink-300/40" />
-            ) : (
-              <div className="w-3 h-3 rounded-full bg-rose-200/50 blur-[1px]" />
-            )}
-          </motion.div>
+            ❄
+          </div>
         ))}
+      </div>
+
+      {/* Twinkling stars */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-[hsl(var(--christmas-gold))] rounded-full animate-twinkle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 50}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Christmas trees silhouettes */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+        <div className="flex justify-between items-end px-4">
+          <TreePine className="w-16 h-24 md:w-24 md:h-36 text-[hsl(150,50%,15%)]" />
+          <TreePine className="w-12 h-20 md:w-20 md:h-32 text-[hsl(150,50%,12%)]" />
+          <TreePine className="w-20 h-28 md:w-28 md:h-40 text-[hsl(150,50%,18%)]" />
+          <TreePine className="w-14 h-22 md:w-22 md:h-34 text-[hsl(150,50%,14%)]" />
+          <TreePine className="w-16 h-24 md:w-24 md:h-36 text-[hsl(150,50%,16%)]" />
+        </div>
       </div>
 
       <AnimatePresence mode="wait">
         {!isUnlocked ? (
           <motion.div
-            key="locked"
+            key="countdown"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -120,22 +136,22 @@ const Index = () => {
           >
             <motion.div
               animate={{ 
-                scale: [1, 1.08, 1],
-                rotate: [0, 3, -3, 0]
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0]
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <Gift className="w-24 h-24 mx-auto text-pink-400 mb-8 drop-shadow-lg" />
+              <Mail className="w-20 h-20 mx-auto text-[hsl(var(--christmas-red))] mb-6 drop-shadow-lg" />
             </motion.div>
             
-            <h1 className="text-4xl md:text-5xl font-script text-pink-500 mb-4 drop-shadow-sm">
-              Something Special Awaits~
+            <h1 className="text-4xl md:text-5xl font-script text-[hsl(var(--christmas-cream))] mb-2 drop-shadow-lg">
+              A Letter Awaits
             </h1>
-            <p className="text-pink-400 mb-12 text-lg font-medium tracking-wide">
-              Opens on December 24th ✨
+            <p className="text-[hsl(var(--christmas-gold))] mb-10 text-lg font-medium tracking-wide">
+              Opens on Christmas Day ❄
             </p>
 
-            <div className="flex gap-3 md:gap-5 justify-center mb-10">
+            <div className="flex gap-3 md:gap-5 justify-center mb-8">
               {[
                 { label: "Days", value: timeLeft.days },
                 { label: "Hours", value: timeLeft.hours },
@@ -144,7 +160,7 @@ const Index = () => {
               ].map((item) => (
                 <motion.div
                   key={item.label}
-                  className="bg-white/60 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-xl shadow-pink-200/40 min-w-[70px] md:min-w-[100px] border border-pink-100"
+                  className="bg-[hsl(var(--christmas-green))]/80 backdrop-blur-md rounded-2xl p-4 md:p-5 shadow-xl min-w-[70px] md:min-w-[90px] border border-[hsl(var(--christmas-gold))]/20"
                   whileHover={{ scale: 1.08, y: -5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -152,11 +168,11 @@ const Index = () => {
                     key={item.value}
                     initial={{ scale: 1.3, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="block text-3xl md:text-5xl font-bold text-pink-500 font-cute"
+                    className="block text-3xl md:text-4xl font-bold text-[hsl(var(--christmas-cream))] font-cute"
                   >
                     {String(item.value).padStart(2, "0")}
                   </motion.span>
-                  <span className="text-xs md:text-sm text-pink-400 uppercase tracking-widest font-semibold">
+                  <span className="text-xs md:text-sm text-[hsl(var(--christmas-gold))] uppercase tracking-widest font-semibold">
                     {item.label}
                   </span>
                 </motion.div>
@@ -164,202 +180,167 @@ const Index = () => {
             </div>
 
             <motion.p 
-              className="text-pink-300 text-sm font-medium"
+              className="text-[hsl(var(--christmas-cream))]/60 text-sm font-medium"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              Be patient~ good things take time ♪
+              Something special is coming~ ✨
             </motion.p>
           </motion.div>
-        ) : showPresentAnimation && !presentOpened ? (
+        ) : showLetterAnimation && !envelopeOpened ? (
           <motion.div
-            key="present-animation"
+            key="envelope"
             className="text-center z-10 flex flex-col items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.5 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
           >
-            {/* Sparkle burst effect */}
-            {[...Array(12)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ 
-                  scale: [0, 1, 0],
-                  opacity: [0, 1, 0],
-                  x: Math.cos((i * 30 * Math.PI) / 180) * 150,
-                  y: Math.sin((i * 30 * Math.PI) / 180) * 150,
-                }}
-                transition={{ 
-                  duration: 1.5, 
-                  delay: 0.5,
-                  repeat: Infinity,
-                  repeatDelay: 2
-                }}
-              >
-                <Sparkles className="text-pink-400" size={20} />
-              </motion.div>
-            ))}
-
-            {/* Present box */}
+            {/* Envelope */}
             <motion.div
               className="relative cursor-pointer"
-              onClick={handleOpenPresent}
+              onClick={handleOpenEnvelope}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {/* Present lid */}
+              {/* Envelope body */}
               <motion.div
-                className="relative z-10"
+                className="w-64 h-44 md:w-80 md:h-56 relative"
                 animate={{ 
-                  y: [0, -8, 0],
-                  rotate: [0, -3, 3, 0]
+                  y: [0, -10, 0],
                 }}
-                transition={{ duration: 2, repeat: Infinity }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
-                {/* Bow */}
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20">
-                  <motion.div
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full shadow-lg" />
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-pink-300 rounded-full" />
-                      {/* Bow loops */}
-                      <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-8 h-6 bg-gradient-to-r from-rose-400 to-pink-400 rounded-full transform -rotate-12" />
-                      <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-8 h-6 bg-gradient-to-l from-rose-400 to-pink-400 rounded-full transform rotate-12" />
-                    </div>
-                  </motion.div>
-                </div>
+                {/* Envelope back */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--christmas-red))] to-[hsl(0,60%,40%)] rounded-lg shadow-2xl" />
                 
-                {/* Lid top */}
-                <div className="w-44 h-8 bg-gradient-to-b from-pink-400 to-pink-500 rounded-t-xl shadow-lg mx-auto relative">
-                  <div className="absolute inset-x-0 top-0 h-2 bg-pink-300/50 rounded-t-xl" />
-                </div>
-              </motion.div>
-              
-              {/* Present box body */}
-              <motion.div 
-                className="w-40 h-32 bg-gradient-to-b from-pink-400 via-pink-500 to-rose-500 rounded-xl shadow-2xl mx-auto relative overflow-hidden"
-                animate={{ 
-                  boxShadow: [
-                    "0 20px 60px -15px rgba(244, 114, 182, 0.5)",
-                    "0 30px 80px -15px rgba(244, 114, 182, 0.7)",
-                    "0 20px 60px -15px rgba(244, 114, 182, 0.5)",
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                {/* Ribbon vertical */}
-                <div className="absolute left-1/2 -translate-x-1/2 w-6 h-full bg-gradient-to-b from-rose-300 to-rose-400" />
-                {/* Ribbon horizontal */}
-                <div className="absolute top-1/2 -translate-y-1/2 w-full h-6 bg-gradient-to-r from-rose-300 via-rose-400 to-rose-300" />
-                {/* Shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+                {/* Envelope front bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-[hsl(0,65%,45%)] to-[hsl(var(--christmas-red))] rounded-b-lg" />
+                
+                {/* Envelope flap (top triangle) */}
+                <motion.div
+                  className="absolute top-0 left-0 right-0 h-1/2 origin-top"
+                  style={{
+                    clipPath: "polygon(0 0, 50% 100%, 100% 0)",
+                    background: "linear-gradient(180deg, hsl(0, 70%, 55%) 0%, hsl(0, 65%, 48%) 100%)",
+                  }}
+                />
+                
+                {/* Wax seal */}
+                <motion.div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-[hsl(var(--christmas-gold))] to-[hsl(35,80%,45%)] rounded-full shadow-lg flex items-center justify-center border-4 border-[hsl(35,90%,55%)]">
+                    <Star className="w-6 h-6 md:w-8 md:h-8 text-[hsl(var(--christmas-dark))]" fill="currentColor" />
+                  </div>
+                </motion.div>
+
+                {/* Decorative holly */}
+                <div className="absolute -top-4 -right-4 text-2xl">🎄</div>
+                <div className="absolute -bottom-4 -left-4 text-2xl">❄️</div>
               </motion.div>
             </motion.div>
 
             <motion.p
-              className="text-pink-500 text-xl font-medium mt-10"
+              className="text-[hsl(var(--christmas-cream))] text-xl font-medium mt-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              Tap to open your present!
+              Tap to open your letter!
             </motion.p>
             
             <motion.div
-              className="mt-4"
+              className="mt-4 flex gap-2"
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1, repeat: Infinity }}
             >
-              <Sparkles className="text-pink-400" size={24} />
+              <Snowflake className="text-[hsl(var(--christmas-cream))]" size={20} />
+              <Snowflake className="text-[hsl(var(--christmas-gold))]" size={24} />
+              <Snowflake className="text-[hsl(var(--christmas-cream))]" size={20} />
+            </motion.div>
+          </motion.div>
+        ) : envelopeOpened && !letterRevealed ? (
+          <motion.div
+            key="opening"
+            className="text-center z-10"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+          >
+            {/* Opening envelope animation */}
+            <motion.div
+              className="w-64 h-44 md:w-80 md:h-56 relative"
+              initial={{ rotateX: 0 }}
+              animate={{ rotateX: 0, scale: [1, 1.1, 0.5], opacity: [1, 1, 0] }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+            >
+              {/* Envelope body */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--christmas-red))] to-[hsl(0,60%,40%)] rounded-lg shadow-2xl" />
+              
+              {/* Flap opening */}
+              <motion.div
+                className="absolute top-0 left-0 right-0 h-1/2 origin-top"
+                style={{
+                  clipPath: "polygon(0 0, 50% 100%, 100% 0)",
+                  background: "linear-gradient(180deg, hsl(0, 70%, 55%) 0%, hsl(0, 65%, 48%) 100%)",
+                }}
+                initial={{ rotateX: 0 }}
+                animate={{ rotateX: -180 }}
+                transition={{ duration: 0.5 }}
+              />
             </motion.div>
           </motion.div>
         ) : (
           <motion.div
-            key="unlocked"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", stiffness: 200 }}
+            key="letter"
+            initial={{ opacity: 0, y: 100, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ type: "spring", stiffness: 150, damping: 20 }}
             className="w-full max-w-2xl z-10"
           >
-            {!letterOpened ? (
-              <motion.div
-                className="text-center"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 200 }}
-              >
-                <motion.div
-                  animate={{ 
-                    y: [0, -15, 0],
-                    rotate: [0, 5, -5, 0]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Sparkles className="w-16 h-16 mx-auto text-pink-400 mb-6" />
-                </motion.div>
-                
-                <h1 className="text-4xl md:text-6xl font-script text-pink-500 mb-4 drop-shadow-sm">
-                  Happy Birthday!
-                </h1>
-                <p className="text-pink-400 mb-10 text-lg">You have something waiting for you~</p>
-                
-                <motion.button
-                  onClick={() => setLetterOpened(true)}
-                  className="bg-gradient-to-r from-pink-400 via-rose-400 to-pink-400 text-white px-10 py-5 rounded-full text-lg font-semibold shadow-2xl shadow-pink-300/50 border-2 border-pink-300/30"
-                  whileHover={{ 
-                    scale: 1.08,
-                    boxShadow: "0 25px 50px -12px rgba(244, 114, 182, 0.5)"
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  animate={{
-                    boxShadow: [
-                      "0 10px 40px -10px rgba(244, 114, 182, 0.4)",
-                      "0 20px 50px -10px rgba(244, 114, 182, 0.6)",
-                      "0 10px 40px -10px rgba(244, 114, 182, 0.4)",
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <span className="flex items-center gap-3">
-                    <Sparkles size={22} />
-                    Open Letter
-                    <Sparkles size={22} />
-                  </span>
-                </motion.button>
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ rotateX: -90, opacity: 0, y: 50 }}
-                animate={{ rotateX: 0, opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="bg-white/70 backdrop-blur-lg rounded-[2rem] p-8 md:p-12 shadow-2xl shadow-pink-200/40 border border-pink-100"
-              >
-                <div className="text-center mb-10">
+            <motion.div
+              className="bg-[hsl(var(--christmas-cream))] rounded-lg p-6 md:p-10 shadow-2xl relative overflow-hidden"
+              style={{
+                backgroundImage: "linear-gradient(135deg, hsl(45, 100%, 96%) 0%, hsl(40, 80%, 92%) 100%)",
+              }}
+            >
+              {/* Paper texture overlay */}
+              <div className="absolute inset-0 opacity-30" style={{
+                backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E\")",
+              }} />
+
+              {/* Decorative corners */}
+              <div className="absolute top-2 left-2 text-[hsl(var(--christmas-red))]/20 text-4xl">❧</div>
+              <div className="absolute top-2 right-2 text-[hsl(var(--christmas-green))]/20 text-4xl rotate-90">❧</div>
+              <div className="absolute bottom-2 left-2 text-[hsl(var(--christmas-green))]/20 text-4xl -rotate-90">❧</div>
+              <div className="absolute bottom-2 right-2 text-[hsl(var(--christmas-red))]/20 text-4xl rotate-180">❧</div>
+
+              <div className="relative z-10">
+                <div className="text-center mb-8">
                   <motion.div
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                    className="flex justify-center gap-2 mb-3"
                   >
-                    <Sparkles className="w-12 h-12 mx-auto text-pink-400 mb-4" />
+                    <TreePine className="w-6 h-6 text-[hsl(var(--christmas-green))]" />
+                    <Star className="w-6 h-6 text-[hsl(var(--christmas-gold))]" fill="currentColor" />
+                    <TreePine className="w-6 h-6 text-[hsl(var(--christmas-green))]" />
                   </motion.div>
-                  <h2 className="text-3xl md:text-4xl font-script text-pink-500">
-                    For You~
+                  <h2 className="text-2xl md:text-3xl font-script text-[hsl(var(--christmas-red))]">
+                    Merry Christmas~
                   </h2>
                 </div>
 
-                <div className="space-y-6 mb-8">
+                <div className="space-y-5 mb-8 max-h-[50vh] overflow-y-auto pr-2">
                   {letterParagraphs.slice(0, currentParagraph + 1).map((paragraph, index) => (
                     <motion.p
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, ease: "easeOut" }}
-                      className="text-pink-600/90 leading-loose text-base md:text-lg text-justify indent-8 font-medium"
+                      className="text-[hsl(var(--christmas-dark))] leading-relaxed text-sm md:text-base text-justify indent-6 font-medium"
                     >
                       {paragraph}
                     </motion.p>
@@ -375,7 +356,7 @@ const Index = () => {
                   >
                     <motion.button
                       onClick={handleNextParagraph}
-                      className="bg-gradient-to-r from-pink-300 to-rose-300 text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-pink-200/50"
+                      className="bg-gradient-to-r from-[hsl(var(--christmas-red))] to-[hsl(0,60%,45%)] text-[hsl(var(--christmas-cream))] px-8 py-3 rounded-full font-semibold shadow-lg"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       animate={{
@@ -392,10 +373,12 @@ const Index = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="mt-12 text-right border-t border-pink-200/50 pt-8"
+                      className="mt-10 text-right border-t border-[hsl(var(--christmas-green))]/20 pt-6"
                     >
-                      <p className="text-pink-400 italic text-lg font-medium">From:</p>
-                      <p className="text-pink-500 font-script text-4xl mt-2">Guian Beriso</p>
+                      <p className="text-[hsl(var(--christmas-green))] italic text-base font-medium mb-1">With warmth,</p>
+                      <p className="text-2xl md:text-3xl font-script text-[hsl(var(--christmas-red))]">
+                        Guian
+                      </p>
                     </motion.div>
 
                     <motion.div
@@ -404,14 +387,18 @@ const Index = () => {
                       transition={{ delay: 1 }}
                       className="mt-8 text-center"
                     >
-                      <p className="text-pink-400/80 text-sm font-medium">
-                        ✨ Wishing you the happiest of birthdays ✨
-                      </p>
+                      <div className="flex justify-center gap-3 text-2xl">
+                        <span>🎄</span>
+                        <span>⭐</span>
+                        <span>❄️</span>
+                        <span>🎁</span>
+                        <span>🎄</span>
+                      </div>
                     </motion.div>
                   </>
                 )}
-              </motion.div>
-            )}
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
