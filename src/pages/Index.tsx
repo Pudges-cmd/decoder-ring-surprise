@@ -64,8 +64,8 @@ const Index = () => {
     }
   };
 
-  // Generate floating hearts
-  const floatingHearts = Array.from({ length: 15 }, (_, i) => ({
+  // Generate floating hearts (reduced)
+  const floatingHearts = Array.from({ length: 6 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
     delay: Math.random() * 10,
@@ -120,11 +120,11 @@ const Index = () => {
               className="mb-8"
             >
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Heart className="text-pink-400 animate-pulse-soft" size={28} fill="currentColor" />
+                <Sparkles className="text-pink-400" size={24} />
                 <h1 className="text-3xl md:text-4xl font-bold text-pink-600">
                   Something Special Awaits~
                 </h1>
-                <Heart className="text-pink-400 animate-pulse-soft" size={28} fill="currentColor" />
+                <Sparkles className="text-pink-400" size={24} />
               </div>
               <p className="text-pink-500 text-lg">A little surprise is waiting for you!</p>
             </motion.div>
@@ -228,16 +228,16 @@ const Index = () => {
             >
               {/* Decorative corners */}
               <div className="absolute top-4 left-4 text-pink-300">
-                <Heart size={16} fill="currentColor" />
+                <Sparkles size={14} />
               </div>
               <div className="absolute top-4 right-4 text-pink-300">
-                <Heart size={16} fill="currentColor" />
+                <Sparkles size={14} />
               </div>
               <div className="absolute bottom-4 left-4 text-pink-300">
-                <Heart size={16} fill="currentColor" />
+                <Sparkles size={14} />
               </div>
               <div className="absolute bottom-4 right-4 text-pink-300">
-                <Heart size={16} fill="currentColor" />
+                <Sparkles size={14} />
               </div>
 
               {/* Letter header */}
@@ -279,9 +279,9 @@ const Index = () => {
                       className="mt-6 px-6 py-3 bg-gradient-to-r from-pink-400 to-rose-400 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 mx-auto"
                     >
                       {currentParagraph < letterParagraphs.length - 1 ? (
-                        <>Continue reading~ <Heart size={16} fill="currentColor" /></>
+                        <>Continue reading~ ✨</>
                       ) : (
-                        <>See full letter~ <Heart size={16} fill="currentColor" /></>
+                        <>See full letter~ ✨</>
                       )}
                     </motion.button>
                   </>
