@@ -1,78 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Christmas Theme Design System */
-
 @layer base {
   :root {
-    --background: 150 40% 8%;
-    --foreground: 45 100% 96%;
-
-    --card: 150 35% 12%;
-    --card-foreground: 45 100% 96%;
-
-    --popover: 150 35% 12%;
-    --popover-foreground: 45 100% 96%;
-
-    --primary: 0 72% 51%;
-    --primary-foreground: 45 100% 96%;
-
-    --secondary: 150 60% 25%;
-    --secondary-foreground: 45 100% 96%;
-
-    --muted: 150 30% 18%;
-    --muted-foreground: 45 40% 70%;
-
-    --accent: 45 100% 60%;
-    --accent-foreground: 150 40% 8%;
-
+    --background: 350 100% 98%;
+    --foreground: 350 30% 25%;
+    --card: 350 100% 99%;
+    --card-foreground: 350 30% 25%;
+    --popover: 350 100% 99%;
+    --popover-foreground: 350 30% 25%;
+    --primary: 350 80% 70%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 350 60% 92%;
+    --secondary-foreground: 350 30% 30%;
+    --muted: 350 40% 95%;
+    --muted-foreground: 350 20% 50%;
+    --accent: 350 70% 85%;
+    --accent-foreground: 350 30% 25%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 150 30% 20%;
-    --input: 150 30% 20%;
-    --ring: 0 72% 51%;
-
-    --radius: 0.5rem;
-
-    /* Christmas custom colors */
-    --christmas-red: 0 72% 51%;
-    --christmas-green: 150 60% 25%;
-    --christmas-gold: 45 100% 60%;
-    --christmas-cream: 45 100% 96%;
-    --christmas-dark: 150 40% 8%;
-    --snow: 200 30% 95%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 350 50% 90%;
+    --input: 350 50% 90%;
+    --ring: 350 80% 70%;
+    --radius: 1rem;
+    
+    /* Custom pink palette */
+    --pink-light: 350 100% 97%;
+    --pink-soft: 350 80% 92%;
+    --pink-medium: 350 75% 80%;
+    --pink-primary: 350 80% 70%;
+    --pink-dark: 350 60% 55%;
+    --cream: 40 60% 97%;
   }
 
   .dark {
-    --background: 150 40% 8%;
-    --foreground: 45 100% 96%;
-
-    --card: 150 35% 12%;
-    --card-foreground: 45 100% 96%;
-
-    --popover: 150 35% 12%;
-    --popover-foreground: 45 100% 96%;
-
-    --primary: 0 72% 51%;
-    --primary-foreground: 45 100% 96%;
-
-    --secondary: 150 60% 25%;
-    --secondary-foreground: 45 100% 96%;
-
-    --muted: 150 30% 18%;
-    --muted-foreground: 45 40% 70%;
-
-    --accent: 45 100% 60%;
-    --accent-foreground: 150 40% 8%;
-
+    --background: 350 30% 10%;
+    --foreground: 350 20% 95%;
+    --card: 350 30% 12%;
+    --card-foreground: 350 20% 95%;
+    --popover: 350 30% 12%;
+    --popover-foreground: 350 20% 95%;
+    --primary: 350 80% 70%;
+    --primary-foreground: 350 30% 10%;
+    --secondary: 350 30% 20%;
+    --secondary-foreground: 350 20% 90%;
+    --muted: 350 30% 18%;
+    --muted-foreground: 350 20% 65%;
+    --accent: 350 40% 25%;
+    --accent-foreground: 350 20% 95%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 150 30% 20%;
-    --input: 150 30% 20%;
-    --ring: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 350 30% 20%;
+    --input: 350 30% 20%;
+    --ring: 350 80% 70%;
   }
 }
 
@@ -80,37 +63,78 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
+    font-family: 'Quicksand', sans-serif;
   }
 }
 
-/* Snowfall animation */
-@keyframes snowfall {
+/* Floating hearts animation */
+@keyframes float-up {
   0% {
-    transform: translateY(-10vh) translateX(0);
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
     opacity: 1;
   }
   100% {
-    transform: translateY(110vh) translateX(20px);
-    opacity: 0.3;
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
   }
 }
 
-@keyframes twinkle {
+@keyframes pulse-soft {
   0%, 100% {
-    opacity: 0.3;
+    transform: scale(1);
+    opacity: 0.8;
   }
   50% {
+    transform: scale(1.1);
     opacity: 1;
   }
 }
 
-.animate-snowfall {
-  animation: snowfall linear infinite;
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
-.animate-twinkle {
-  animation: twinkle ease-in-out infinite;
+.animate-float-up {
+  animation: float-up linear infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--pink-light));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--pink-medium));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--pink-primary));
 }

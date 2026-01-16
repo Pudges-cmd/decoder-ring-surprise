@@ -15,7 +15,6 @@ export default {
     extend: {
       fontFamily: {
         'cute': ['Quicksand', 'sans-serif'],
-        'script': ['Dancing Script', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,24 +50,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        pink: {
+          light: "hsl(var(--pink-light))",
+          soft: "hsl(var(--pink-soft))",
+          medium: "hsl(var(--pink-medium))",
+          primary: "hsl(var(--pink-primary))",
+          dark: "hsl(var(--pink-dark))",
         },
-        christmas: {
-          red: "hsl(var(--christmas-red))",
-          green: "hsl(var(--christmas-green))",
-          gold: "hsl(var(--christmas-gold))",
-          cream: "hsl(var(--christmas-cream))",
-          dark: "hsl(var(--christmas-dark))",
-        },
-        snow: "hsl(var(--snow))",
       },
       borderRadius: {
         lg: "var(--radius)",
