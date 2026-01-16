@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Sparkles, Gift } from "lucide-react";
+import { Sparkles, Gift, Star } from "lucide-react";
 
 const Index = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -64,29 +64,29 @@ const Index = () => {
     }
   };
 
-  // Generate floating hearts (reduced)
-  const floatingHearts = Array.from({ length: 6 }, (_, i) => ({
+  // Generate floating stars
+  const floatingStars = Array.from({ length: 8 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
     delay: Math.random() * 10,
     duration: 8 + Math.random() * 6,
-    size: 12 + Math.random() * 16,
+    size: 10 + Math.random() * 12,
   }));
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 flex items-center justify-center p-4 overflow-hidden relative">
-      {/* Floating Hearts Background */}
-      {floatingHearts.map((heart) => (
+      {/* Floating Stars Background */}
+      {floatingStars.map((star) => (
         <motion.div
-          key={heart.id}
+          key={star.id}
           className="absolute text-pink-300 pointer-events-none animate-float-up"
           style={{
-            left: `${heart.left}%`,
-            animationDelay: `${heart.delay}s`,
-            animationDuration: `${heart.duration}s`,
+            left: `${star.left}%`,
+            animationDelay: `${star.delay}s`,
+            animationDuration: `${star.duration}s`,
           }}
         >
-          <Heart size={heart.size} fill="currentColor" />
+          <Star size={star.size} fill="currentColor" />
         </motion.div>
       ))}
 
@@ -175,7 +175,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-2xl md:text-3xl font-bold text-pink-600 mb-8"
             >
-              You have a message! 💌
+              You have a message! ✨
             </motion.h2>
 
             <motion.div
@@ -310,10 +310,10 @@ const Index = () => {
                       className="pt-6 text-right"
                     >
                       <p className="text-pink-600 font-semibold text-xl">
-                        With care,
+                        Take care,
                       </p>
                       <p className="text-pink-500 text-2xl font-bold mt-2">
-                        Guian 💗
+                        Guian ✨
                       </p>
                     </motion.div>
                   </motion.div>
