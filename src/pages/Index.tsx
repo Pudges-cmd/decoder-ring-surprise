@@ -51,7 +51,7 @@ const Index = () => {
     "Hey, I guess we're back here again, right HAHAHAHA? I guess that's just how being this shy goes I guess.",
     "Honestly, after my confession I never really got this far. The fact that we still have the streak surprises me every day I see it still alive.\n\nWhat I mean to say is, I'm glad that we still managed to stay friends all this time :).",
     "According to the Britannica Dictionary, Valentines Day is a day of expressing love, affection, and friendship through gifts, cards, and romantic gestures.\n\nAnd I guess this is my version of that. Just me typing this out in the middle of the night, hoping this makes your day better or at least makes you smile a little.",
-    "I appreciate the little things you know?\n\nWhen you sometimes greet me, good morning.\nWhen it's late, tell me a good night before you sleep.\nWhen we talk on Instagram or Messenger notes.\n\nI don't know how it meant to you, but it meant a lot to me.",
+    "I appreciate the little things you know?\n\nWhen you sometimes greet me, good morning.\nWhen it's late, you'd tell me a good night before you sleep.\nWhen we talk on Instagram or Messenger notes.\n\nI don't know how it meant to you, but it meant a lot to me.",
     "I don't want this to be some big, dramatic confession part two. Nor, have this be something that makes things between us more awkward than we already are.\n\nBut, I just wanted to take the chance to tell you that whatever this friendship is—I appreciate it, more than you think.\n\nAnd that no matter what there's always someone in your corner, that's proud and cares about you.",
   ];
 
