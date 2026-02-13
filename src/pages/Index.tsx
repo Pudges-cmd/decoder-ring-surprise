@@ -12,8 +12,9 @@ const Index = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showPresentAnimation, setShowPresentAnimation] = useState(false);
   const [presentOpened, setPresentOpened] = useState(false);
-  const [showFullLetter, setShowFullLetter] = useState(false);
+  const [showInitialMessage, setShowInitialMessage] = useState(true);
   const [currentParagraph, setCurrentParagraph] = useState(0);
+  const [showFullLetter, setShowFullLetter] = useState(false);
 
   // Target date
   const targetDate = new Date("2025-01-20T00:00:00");
@@ -47,13 +48,19 @@ const Index = () => {
   }, []);
 
   const letterParagraphs = [
-    "Hi! It's 11 am and may exam on Monday and nag-eedit ako code, HAHHAHAHAH.",
-    "Anyways, wala lang, kamusta? I hope the exam stress isn't getting too much for you.",
-    "Andito nanaman pala tayo sa website na to, masyadong torpe magchat eh HAHHAHA. To keep this short, I hope you're doing great, and I hope you're not too stressed and having too much of a hard time for exam preparation. I know you'll do great on the exams, ikaw na yan eh. Goodluck ulit :))",
+    "Hey, I guess we're back here again, right HAHAHAHA? I guess that's just how being this shy goes I guess.",
+    "Honestly, after my confession I never really got this far. The fact that we still have the streak surprises me every day I see it still alive.\n\nWhat I mean to say is, I'm glad that we still managed to stay friends all this time :).",
+    "According to the Britannica Dictionary, Valentines Day is a day of expressing love, affection, and friendship through gifts, cards, and romantic gestures.\n\nAnd I guess this is my version of that. Just me typing this out in the middle of the night, hoping this makes your day better or at least makes you smile a little.",
+    "I appreciate the little things you know?\n\nWhen you sometimes greet me, good morning.\nWhen it's late, tell me a good night before you sleep.\nWhen we talk on Instagram or Messenger notes.\n\nI don't know how it meant to you, but it meant a lot to me.",
+    "I don't want this to be some big, dramatic confession part two. Nor, have this be something that makes things between us more awkward than we already are.\n\nBut, I just wanted to take the chance to tell you that whatever this friendship is—I appreciate it, more than you think.\n\nAnd that no matter what there's always someone in your corner, that's proud and cares about you.",
   ];
 
   const handleOpenPresent = () => {
     setPresentOpened(true);
+  };
+
+  const handleKeepReading = () => {
+    setShowInitialMessage(false);
   };
 
   const handleContinueReading = () => {
@@ -64,44 +71,50 @@ const Index = () => {
     }
   };
 
-  // Generate floating stars
-  const floatingStars = Array.from({ length: 8 }, (_, i) => ({
+  // Generate scattered pulsating stars
+  const scatteredStars = Array.from({ length: 14 }, (_, i) => ({
     id: i,
-    left: Math.random() * 100,
-    delay: Math.random() * 10,
-    duration: 8 + Math.random() * 6,
-    size: 10 + Math.random() * 12,
+    left: 5 + Math.random() * 90,
+    top: 5 + Math.random() * 90,
+    delay: Math.random() * 4,
+    duration: 2.5 + Math.random() * 3,
+    size: 8 + Math.random() * 14,
+    glow: Math.random() > 0.5,
   }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 flex items-center justify-center p-4 overflow-hidden relative">
-      {/* Floating Stars Background */}
-      {floatingStars.map((star) => (
-        <motion.div
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-green-50 to-pink-100 flex items-center justify-center p-4 overflow-hidden relative"
+      style={{ background: `linear-gradient(135deg, hsl(340 70% 96%), hsl(130 30% 94%), hsl(340 60% 94%))` }}
+    >
+      {/* Pulsating Stars Background */}
+      {scatteredStars.map((star) => (
+        <div
           key={star.id}
-          className="absolute text-pink-300 pointer-events-none animate-float-up"
+          className={`absolute pointer-events-none ${star.glow ? 'animate-star-glow' : 'animate-star-pulse'}`}
           style={{
             left: `${star.left}%`,
+            top: `${star.top}%`,
             animationDelay: `${star.delay}s`,
             animationDuration: `${star.duration}s`,
+            color: star.id % 3 === 0 ? 'hsl(340 50% 75%)' : star.id % 3 === 1 ? 'hsl(130 25% 65%)' : 'hsl(340 40% 80%)',
           }}
         >
           <Star size={star.size} fill="currentColor" />
-        </motion.div>
+        </div>
       ))}
 
       {/* Sparkle decorations */}
-      <div className="absolute top-10 left-10 text-pink-300 animate-sparkle">
-        <Sparkles size={24} />
-      </div>
-      <div className="absolute top-20 right-16 text-pink-400 animate-sparkle" style={{ animationDelay: "0.5s" }}>
+      <div className="absolute top-10 left-10 text-pink-medium animate-sparkle">
         <Sparkles size={20} />
       </div>
-      <div className="absolute bottom-32 left-20 text-pink-300 animate-sparkle" style={{ animationDelay: "1s" }}>
-        <Sparkles size={18} />
+      <div className="absolute top-20 right-16 animate-sparkle" style={{ animationDelay: "0.5s", color: 'hsl(130 25% 65%)' }}>
+        <Sparkles size={16} />
       </div>
-      <div className="absolute bottom-20 right-10 text-pink-400 animate-sparkle" style={{ animationDelay: "0.3s" }}>
-        <Sparkles size={22} />
+      <div className="absolute bottom-32 left-20 text-pink-medium animate-sparkle" style={{ animationDelay: "1s" }}>
+        <Sparkles size={14} />
+      </div>
+      <div className="absolute bottom-20 right-10 animate-sparkle" style={{ animationDelay: "0.3s", color: 'hsl(130 28% 60%)' }}>
+        <Sparkles size={18} />
       </div>
 
       <AnimatePresence mode="wait">
@@ -120,13 +133,13 @@ const Index = () => {
               className="mb-8"
             >
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Sparkles className="text-pink-400" size={24} />
-                <h1 className="text-3xl md:text-4xl font-bold text-pink-600">
+                <Sparkles className="text-pink-primary" size={24} />
+                <h1 className="text-3xl md:text-4xl font-bold" style={{ color: 'hsl(340 50% 45%)' }}>
                   Something Special Awaits~
                 </h1>
-                <Sparkles className="text-pink-400" size={24} />
+                <Sparkles className="text-pink-primary" size={24} />
               </div>
-              <p className="text-pink-500 text-lg">A little surprise is waiting for you!</p>
+              <p style={{ color: 'hsl(130 25% 45%)' }} className="text-lg">A little surprise is waiting for you!</p>
             </motion.div>
 
             <div className="flex gap-4 md:gap-6 justify-center mb-8">
@@ -141,12 +154,13 @@ const Index = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg border border-pink-200"
+                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg"
+                  style={{ borderColor: 'hsl(130 25% 82%)', borderWidth: '1px' }}
                 >
-                  <div className="text-3xl md:text-5xl font-bold text-pink-500">
+                  <div className="text-3xl md:text-5xl font-bold" style={{ color: 'hsl(340 60% 55%)' }}>
                     {String(item.value).padStart(2, "0")}
                   </div>
-                  <div className="text-pink-400 text-sm md:text-base mt-1">
+                  <div style={{ color: 'hsl(130 25% 50%)' }} className="text-sm md:text-base mt-1">
                     {item.label}
                   </div>
                 </motion.div>
@@ -158,7 +172,7 @@ const Index = () => {
               transition={{ duration: 2, repeat: Infinity }}
               className="inline-block"
             >
-              <Gift className="text-pink-400 mx-auto" size={48} />
+              <Gift className="text-pink-primary mx-auto" size={48} />
             </motion.div>
           </motion.div>
         ) : showPresentAnimation && !presentOpened ? (
@@ -173,7 +187,8 @@ const Index = () => {
             <motion.h2
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-2xl md:text-3xl font-bold text-pink-600 mb-8"
+              className="text-2xl md:text-3xl font-bold mb-8"
+              style={{ color: 'hsl(340 50% 45%)' }}
             >
               You have a message! ✨
             </motion.h2>
@@ -184,32 +199,96 @@ const Index = () => {
               onClick={handleOpenPresent}
               className="cursor-pointer relative inline-block"
             >
-              {/* Present box */}
               <motion.div
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="relative"
               >
                 {/* Box body */}
-                <div className="w-40 h-32 bg-gradient-to-br from-pink-400 to-rose-400 rounded-lg shadow-xl relative">
-                  {/* Ribbon vertical */}
-                  <div className="absolute left-1/2 -translate-x-1/2 w-6 h-full bg-pink-200" />
-                  {/* Ribbon horizontal */}
-                  <div className="absolute top-1/2 -translate-y-1/2 w-full h-6 bg-pink-200" />
+                <div className="w-40 h-32 rounded-lg shadow-xl relative"
+                  style={{ background: 'linear-gradient(135deg, hsl(340 60% 70%), hsl(130 25% 65%))' }}
+                >
+                  <div className="absolute left-1/2 -translate-x-1/2 w-6 h-full" style={{ background: 'hsl(340 60% 88%)' }} />
+                  <div className="absolute top-1/2 -translate-y-1/2 w-full h-6" style={{ background: 'hsl(130 25% 85%)' }} />
                 </div>
                 {/* Box lid */}
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-44 h-8 bg-gradient-to-br from-pink-500 to-rose-500 rounded-lg shadow-lg" />
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-44 h-8 rounded-lg shadow-lg"
+                  style={{ background: 'linear-gradient(135deg, hsl(340 55% 60%), hsl(130 28% 55%))' }}
+                />
                 {/* Bow */}
                 <div className="absolute -top-8 left-1/2 -translate-x-1/2">
                   <div className="relative">
-                    <div className="absolute -left-5 w-6 h-8 bg-pink-200 rounded-full transform -rotate-45" />
-                    <div className="absolute -right-5 w-6 h-8 bg-pink-200 rounded-full transform rotate-45" />
-                    <div className="relative w-4 h-4 bg-pink-300 rounded-full z-10" />
+                    <div className="absolute -left-5 w-6 h-8 rounded-full transform -rotate-45" style={{ background: 'hsl(340 60% 85%)' }} />
+                    <div className="absolute -right-5 w-6 h-8 rounded-full transform rotate-45" style={{ background: 'hsl(130 25% 80%)' }} />
+                    <div className="relative w-4 h-4 rounded-full z-10" style={{ background: 'hsl(340 50% 75%)' }} />
                   </div>
                 </div>
               </motion.div>
 
-              <p className="text-pink-500 mt-6 text-lg">Tap to open~</p>
+              <p style={{ color: 'hsl(130 25% 45%)' }} className="mt-6 text-lg">Tap to open~</p>
+            </motion.div>
+          </motion.div>
+        ) : showInitialMessage ? (
+          /* Initial Message */
+          <motion.div
+            key="initial"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            className="w-full max-w-2xl z-10"
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden"
+              style={{ borderColor: 'hsl(130 25% 82%)', borderWidth: '1px' }}
+            >
+              <div className="absolute top-4 left-4" style={{ color: 'hsl(130 25% 70%)' }}>
+                <Star size={12} fill="currentColor" />
+              </div>
+              <div className="absolute top-4 right-4" style={{ color: 'hsl(340 50% 75%)' }}>
+                <Star size={12} fill="currentColor" />
+              </div>
+
+              <div className="text-center mb-6">
+                <motion.h2
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-2xl md:text-3xl font-bold"
+                  style={{ color: 'hsl(340 50% 45%)' }}
+                >
+                  Hey again :p
+                </motion.h2>
+              </div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-lg leading-relaxed text-center"
+                style={{ color: 'hsl(340 30% 35%)' }}
+              >
+                Nakakainis ung mga nagbibigayan letter and flowers nung February 13 noh? HAHAHAH. Anyways, speaking of letters...
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="flex justify-center mt-8"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleKeepReading}
+                  className="px-6 py-3 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2"
+                  style={{ background: 'linear-gradient(135deg, hsl(340 60% 65%), hsl(130 28% 55%))' }}
+                >
+                  Keep Reading ✨
+                </motion.button>
+              </motion.div>
             </motion.div>
           </motion.div>
         ) : (
@@ -224,19 +303,20 @@ const Index = () => {
               initial={{ rotateX: -90 }}
               animate={{ rotateX: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 border border-pink-200 relative overflow-hidden"
+              className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden"
+              style={{ borderColor: 'hsl(130 25% 82%)', borderWidth: '1px' }}
             >
               {/* Decorative corners */}
-              <div className="absolute top-4 left-4 text-pink-300">
+              <div className="absolute top-4 left-4" style={{ color: 'hsl(130 25% 70%)' }}>
                 <Sparkles size={14} />
               </div>
-              <div className="absolute top-4 right-4 text-pink-300">
+              <div className="absolute top-4 right-4" style={{ color: 'hsl(340 50% 75%)' }}>
                 <Sparkles size={14} />
               </div>
-              <div className="absolute bottom-4 left-4 text-pink-300">
+              <div className="absolute bottom-4 left-4" style={{ color: 'hsl(340 50% 75%)' }}>
                 <Sparkles size={14} />
               </div>
-              <div className="absolute bottom-4 right-4 text-pink-300">
+              <div className="absolute bottom-4 right-4" style={{ color: 'hsl(130 25% 70%)' }}>
                 <Sparkles size={14} />
               </div>
 
@@ -248,16 +328,16 @@ const Index = () => {
                   transition={{ delay: 0.3, type: "spring" }}
                   className="inline-flex items-center gap-2"
                 >
-                  <Sparkles className="text-pink-400" size={24} />
-                  <h2 className="text-2xl md:text-3xl font-bold text-pink-600">
-                    Hey there~
+                  <Star className="text-pink-primary" size={20} fill="currentColor" />
+                  <h2 className="text-2xl md:text-3xl font-bold" style={{ color: 'hsl(340 50% 45%)' }}>
+                    Happy Valentines
                   </h2>
-                  <Sparkles className="text-pink-400" size={24} />
+                  <Star className="text-pink-primary" size={20} fill="currentColor" />
                 </motion.div>
               </div>
 
               {/* Letter content */}
-              <div className="space-y-6 text-pink-700 leading-relaxed">
+              <div className="space-y-6 leading-relaxed" style={{ color: 'hsl(340 30% 30%)' }}>
                 {!showFullLetter ? (
                   <>
                     <AnimatePresence mode="wait">
@@ -266,7 +346,7 @@ const Index = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="text-lg"
+                        className="text-lg whitespace-pre-line"
                       >
                         {letterParagraphs[currentParagraph]}
                       </motion.p>
@@ -276,12 +356,13 @@ const Index = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={handleContinueReading}
-                      className="mt-6 px-6 py-3 bg-gradient-to-r from-pink-400 to-rose-400 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 mx-auto"
+                      className="mt-6 px-6 py-3 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2 mx-auto"
+                      style={{ background: 'linear-gradient(135deg, hsl(340 60% 65%), hsl(130 28% 55%))' }}
                     >
                       {currentParagraph < letterParagraphs.length - 1 ? (
-                        <>Continue reading~ ✨</>
+                        <>Continue Reading ✨</>
                       ) : (
-                        <>See full letter~ ✨</>
+                        <>See Full Letter ✨</>
                       )}
                     </motion.button>
                   </>
@@ -297,7 +378,7 @@ const Index = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.15 }}
-                        className="text-lg"
+                        className="text-lg whitespace-pre-line"
                       >
                         {paragraph}
                       </motion.p>
@@ -306,14 +387,14 @@ const Index = () => {
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ delay: 0.6 }}
+                      transition={{ delay: 0.8 }}
                       className="pt-6 text-right"
                     >
-                      <p className="text-pink-600 font-semibold text-xl">
-                        Take care,
+                      <p className="font-semibold text-xl" style={{ color: 'hsl(340 50% 45%)' }}>
+                        "E"
                       </p>
-                      <p className="text-pink-500 text-2xl font-bold mt-2">
-                        Guian ✨
+                      <p className="text-sm mt-4 italic" style={{ color: 'hsl(130 25% 45%)' }}>
+                        P.s Good luck sa card day!
                       </p>
                     </motion.div>
                   </motion.div>

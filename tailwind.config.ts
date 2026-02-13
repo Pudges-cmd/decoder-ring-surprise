@@ -57,6 +57,13 @@ export default {
           primary: "hsl(var(--pink-primary))",
           dark: "hsl(var(--pink-dark))",
         },
+        moss: {
+          light: "hsl(var(--moss-light))",
+          soft: "hsl(var(--moss-soft))",
+          medium: "hsl(var(--moss-medium))",
+          primary: "hsl(var(--moss-primary))",
+          dark: "hsl(var(--moss-dark))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
