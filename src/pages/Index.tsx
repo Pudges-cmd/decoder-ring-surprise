@@ -85,7 +85,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 overflow-hidden relative"
-      style={{ background: `linear-gradient(135deg, hsl(340 70% 96%), hsl(130 30% 94%), hsl(340 60% 94%))` }}
+      style={{ background: `linear-gradient(135deg, hsl(340 70% 96%), hsl(345 60% 93%), hsl(350 65% 95%))` }}
     >
       {/* Pulsating Sparkles & Hearts Background */}
       {scatteredElements.map((el) => (
