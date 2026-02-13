@@ -209,28 +209,26 @@ const Index = () => {
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="relative"
               >
-                {/* Box body */}
-                <div className="w-40 h-32 rounded-lg shadow-xl relative"
-                  style={{ background: 'linear-gradient(135deg, hsl(340 60% 70%), hsl(130 25% 65%))' }}
+                {/* Envelope body */}
+                <div className="w-48 h-32 rounded-md shadow-xl relative overflow-hidden"
+                  style={{ background: 'hsl(340 60% 88%)' }}
                 >
-                  <div className="absolute left-1/2 -translate-x-1/2 w-6 h-full" style={{ background: 'hsl(340 60% 88%)' }} />
-                  <div className="absolute top-1/2 -translate-y-1/2 w-full h-6" style={{ background: 'hsl(130 25% 85%)' }} />
-                </div>
-                {/* Box lid */}
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-44 h-8 rounded-lg shadow-lg"
-                  style={{ background: 'linear-gradient(135deg, hsl(340 55% 60%), hsl(130 28% 55%))' }}
-                />
-                {/* Bow */}
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2">
-                  <div className="relative">
-                    <div className="absolute -left-5 w-6 h-8 rounded-full transform -rotate-45" style={{ background: 'hsl(340 60% 85%)' }} />
-                    <div className="absolute -right-5 w-6 h-8 rounded-full transform rotate-45" style={{ background: 'hsl(130 25% 80%)' }} />
-                    <div className="relative w-4 h-4 rounded-full z-10" style={{ background: 'hsl(340 50% 75%)' }} />
-                  </div>
+                  {/* Envelope flap (triangle) */}
+                  <div className="absolute top-0 left-0 w-full h-0 border-l-[96px] border-r-[96px] border-t-[52px] border-l-transparent border-r-transparent"
+                    style={{ borderTopColor: 'hsl(340 55% 78%)' }}
+                  />
+                  {/* Bottom fold lines */}
+                  <div className="absolute bottom-0 left-0 w-full h-0 border-l-[96px] border-r-[96px] border-b-[40px] border-l-transparent border-r-transparent"
+                    style={{ borderBottomColor: 'hsl(340 50% 82%)' }}
+                  />
+                  {/* Letter peeking out */}
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-36 h-8 rounded-t-sm"
+                    style={{ background: 'white', boxShadow: '0 -2px 4px rgba(0,0,0,0.05)' }}
+                  />
                 </div>
               </motion.div>
 
-              <p style={{ color: 'hsl(130 25% 45%)' }} className="mt-6 text-lg">Tap to open~</p>
+              <p style={{ color: 'hsl(340 40% 50%)' }} className="mt-6 text-lg">Tap to open~</p>
             </motion.div>
           </motion.div>
         ) : showInitialMessage ? (
