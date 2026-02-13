@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Gift, Star } from "lucide-react";
+import { Sparkles, Gift, Star, Heart } from "lucide-react";
 
 const Index = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -71,35 +71,40 @@ const Index = () => {
     }
   };
 
-  // Generate scattered pulsating stars
-  const scatteredStars = Array.from({ length: 14 }, (_, i) => ({
+  // Generate scattered pulsating elements (sparkles + a few hearts)
+  const scatteredElements = Array.from({ length: 18 }, (_, i) => ({
     id: i,
     left: 5 + Math.random() * 90,
     top: 5 + Math.random() * 90,
     delay: Math.random() * 4,
     duration: 2.5 + Math.random() * 3,
-    size: 8 + Math.random() * 14,
+    size: 10 + Math.random() * 14,
     glow: Math.random() > 0.5,
+    type: i % 5 === 0 ? 'heart' as const : 'sparkle' as const, // ~20% hearts, ~80% sparkles
   }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-green-50 to-pink-100 flex items-center justify-center p-4 overflow-hidden relative"
+    <div className="min-h-screen flex items-center justify-center p-4 overflow-hidden relative"
       style={{ background: `linear-gradient(135deg, hsl(340 70% 96%), hsl(130 30% 94%), hsl(340 60% 94%))` }}
     >
-      {/* Pulsating Stars Background */}
-      {scatteredStars.map((star) => (
+      {/* Pulsating Sparkles & Hearts Background */}
+      {scatteredElements.map((el) => (
         <div
-          key={star.id}
-          className={`absolute pointer-events-none ${star.glow ? 'animate-star-glow' : 'animate-star-pulse'}`}
+          key={el.id}
+          className={`absolute pointer-events-none ${el.glow ? 'animate-star-glow' : 'animate-star-pulse'}`}
           style={{
-            left: `${star.left}%`,
-            top: `${star.top}%`,
-            animationDelay: `${star.delay}s`,
-            animationDuration: `${star.duration}s`,
-            color: star.id % 3 === 0 ? 'hsl(340 50% 75%)' : star.id % 3 === 1 ? 'hsl(130 25% 65%)' : 'hsl(340 40% 80%)',
+            left: `${el.left}%`,
+            top: `${el.top}%`,
+            animationDelay: `${el.delay}s`,
+            animationDuration: `${el.duration}s`,
+            color: el.id % 3 === 0 ? 'hsl(340 50% 75%)' : el.id % 3 === 1 ? 'hsl(130 25% 65%)' : 'hsl(340 40% 80%)',
           }}
         >
-          <Star size={star.size} fill="currentColor" />
+          {el.type === 'heart' ? (
+            <Heart size={el.size} fill="currentColor" />
+          ) : (
+            <Sparkles size={el.size} />
+          )}
         </div>
       ))}
 
