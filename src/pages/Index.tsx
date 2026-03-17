@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Heart } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const Index = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
