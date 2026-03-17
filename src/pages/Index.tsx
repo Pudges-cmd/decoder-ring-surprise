@@ -114,7 +114,7 @@ const Index = () => {
                 </div>
               </motion.div>
 
-              <p style={{ color: 'hsl(340 40% 50%)' }} className="mt-6 text-lg">Tap to open~</p>
+              <p style={{ color: 'hsl(340 40% 50%)' }} className="mt-6 text-lg">hi po pakipindot</p>
             </motion.div>
           </motion.div>
         ) : presentOpened ? (
