@@ -14,12 +14,12 @@
     --popover-foreground: 340 30% 20%;
     --primary: 340 70% 65%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 130 25% 88%;
-    --secondary-foreground: 130 30% 25%;
-    --muted: 130 20% 93%;
+    --secondary: 340 40% 90%;
+    --secondary-foreground: 340 40% 25%;
+    --muted: 340 25% 93%;
     --muted-foreground: 340 15% 45%;
-    --accent: 130 30% 82%;
-    --accent-foreground: 130 35% 20%;
+    --accent: 340 45% 85%;
+    --accent-foreground: 340 40% 20%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 340 30% 88%;
@@ -27,18 +27,12 @@
     --ring: 340 70% 65%;
     --radius: 1rem;
 
-    /* Custom palette */
+    /* Custom palette - all pink */
     --pink-light: 340 70% 96%;
     --pink-soft: 340 60% 90%;
     --pink-medium: 340 55% 78%;
     --pink-primary: 340 70% 65%;
     --pink-dark: 340 50% 50%;
-    --moss-light: 130 30% 94%;
-    --moss-soft: 130 25% 85%;
-    --moss-medium: 130 22% 72%;
-    --moss-primary: 130 28% 60%;
-    --moss-dark: 130 30% 40%;
-    --cream: 45 50% 96%;
   }
 
   .dark {
@@ -50,12 +44,12 @@
     --popover-foreground: 340 15% 93%;
     --primary: 340 70% 65%;
     --primary-foreground: 340 25% 8%;
-    --secondary: 130 20% 18%;
-    --secondary-foreground: 130 15% 88%;
-    --muted: 130 20% 15%;
+    --secondary: 340 25% 18%;
+    --secondary-foreground: 340 15% 88%;
+    --muted: 340 20% 15%;
     --muted-foreground: 340 15% 60%;
-    --accent: 130 25% 22%;
-    --accent-foreground: 130 15% 93%;
+    --accent: 340 30% 22%;
+    --accent-foreground: 340 15% 93%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 340 25% 18%;
@@ -108,27 +102,12 @@
   }
 }
 
-@keyframes pulse-soft {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
 .animate-star-pulse {
   animation: star-pulse ease-in-out infinite;
 }
 
 .animate-star-glow {
   animation: star-glow ease-in-out infinite;
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
 }
 
 .animate-sparkle {
@@ -145,10 +124,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--moss-medium));
+  background: hsl(var(--pink-medium));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--moss-primary));
+  background: hsl(var(--pink-primary));
 }
