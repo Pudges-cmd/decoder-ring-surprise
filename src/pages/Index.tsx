@@ -45,11 +45,7 @@ const Index = () => {
             color: el.id % 3 === 0 ? 'hsl(340 50% 75%)' : el.id % 3 === 1 ? 'hsl(340 65% 70%)' : 'hsl(340 40% 80%)',
           }}
         >
-          {el.type === 'heart' ? (
-            <Heart size={el.size} fill="currentColor" />
-          ) : (
-            <Sparkles size={el.size} />
-          )}
+          <Sparkles size={el.size} />
         </div>
       ))}
 
