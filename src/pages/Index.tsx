@@ -84,7 +84,7 @@ const Index = () => {
               className="text-2xl md:text-3xl font-bold mb-8"
               style={{ color: 'hsl(340 50% 45%)' }}
             >
-              You have a message! ✨
+              You have a brand new message
             </motion.h2>
 
             <motion.div
@@ -114,7 +114,7 @@ const Index = () => {
                 </div>
               </motion.div>
 
-              <p style={{ color: 'hsl(340 40% 50%)' }} className="mt-6 text-lg">Tap to open~</p>
+              <p style={{ color: 'hsl(340 40% 50%)' }} className="mt-6 text-lg">hi po pakipindot</p>
             </motion.div>
           </motion.div>
         ) : presentOpened ? (
