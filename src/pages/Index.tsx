@@ -166,7 +166,7 @@ const Index = () => {
                 className="text-center space-y-4"
               >
                 <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'hsl(340 30% 30%)' }}>
-                  Sorry that I sent you that reel that gave you the middle finger, I am very sorry
+                  Sorry that I sent you that reel that gave you the middle finger, I am very sorry:(
                 </p>
                 <p className="font-semibold text-xl pt-4" style={{ color: 'hsl(340 50% 45%)' }}>
                   — 🙈
