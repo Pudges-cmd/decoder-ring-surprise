@@ -26,7 +26,6 @@ const Index = () => {
     duration: 2.5 + Math.random() * 3,
     size: 10 + Math.random() * 14,
     glow: Math.random() > 0.5,
-    type: i % 5 === 0 ? 'heart' as const : 'sparkle' as const,
   }));
 
   return (
