@@ -174,7 +174,7 @@ const Index = () => {
                   Sorry that I sent you that reel that gave you the middle finger, please forgive me:(
                 </p>
                 <p className="font-semibold text-xl pt-4" style={{ color: 'hsl(340 50% 45%)' }}>
-                  — "E"
+                  — 🙈
                 </p>
               </motion.div>
             </motion.div>
