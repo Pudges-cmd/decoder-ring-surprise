@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Heart } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const Index = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -26,7 +26,6 @@ const Index = () => {
     duration: 2.5 + Math.random() * 3,
     size: 10 + Math.random() * 14,
     glow: Math.random() > 0.5,
-    type: i % 5 === 0 ? 'heart' as const : 'sparkle' as const,
   }));
 
   return (
@@ -46,11 +45,7 @@ const Index = () => {
             color: el.id % 3 === 0 ? 'hsl(340 50% 75%)' : el.id % 3 === 1 ? 'hsl(340 65% 70%)' : 'hsl(340 40% 80%)',
           }}
         >
-          {el.type === 'heart' ? (
-            <Heart size={el.size} fill="currentColor" />
-          ) : (
-            <Sparkles size={el.size} />
-          )}
+          <Sparkles size={el.size} />
         </div>
       ))}
 
