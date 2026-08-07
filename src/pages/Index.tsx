@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import cheerupVideo from "@/assets/cheerup.mp4.asset.json";
 
 const Index = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showPresentAnimation, setShowPresentAnimation] = useState(false);
   const [presentOpened, setPresentOpened] = useState(false);
+  const [sunflowers, setSunflowers] = useState<{ id: number; x: number; y: number; rotate: number; delay: number; size: number }[]>([]);
 
   // Already past the date, so unlock immediately
   useEffect(() => {
@@ -15,6 +17,16 @@ const Index = () => {
 
   const handleOpenPresent = () => {
     setPresentOpened(true);
+    setSunflowers(
+      Array.from({ length: 24 }, (_, i) => ({
+        id: i,
+        x: (Math.random() - 0.5) * 700,
+        y: -150 - Math.random() * 450,
+        rotate: (Math.random() - 0.5) * 540,
+        delay: Math.random() * 0.35,
+        size: 22 + Math.random() * 26,
+      }))
+    );
   };
 
   // Generate scattered pulsating elements (sparkles + a few hearts)
