@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import cheerupVideo from "@/assets/cheerup.mp4.asset.json";
 
 const Index = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showPresentAnimation, setShowPresentAnimation] = useState(false);
   const [presentOpened, setPresentOpened] = useState(false);
+  const [sunflowers, setSunflowers] = useState<{ id: number; x: number; y: number; rotate: number; delay: number; size: number }[]>([]);
 
   // Already past the date, so unlock immediately
   useEffect(() => {
@@ -15,6 +17,16 @@ const Index = () => {
 
   const handleOpenPresent = () => {
     setPresentOpened(true);
+    setSunflowers(
+      Array.from({ length: 24 }, (_, i) => ({
+        id: i,
+        x: (Math.random() - 0.5) * 700,
+        y: -150 - Math.random() * 450,
+        rotate: (Math.random() - 0.5) * 540,
+        delay: Math.random() * 0.35,
+        size: 22 + Math.random() * 26,
+      }))
+    );
   };
 
   // Generate scattered pulsating elements (sparkles + a few hearts)
@@ -64,6 +76,21 @@ const Index = () => {
       </div>
 
       <AnimatePresence mode="wait">
+        {sunflowers.length > 0 && (
+          <div className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center">
+            {sunflowers.map((f) => (
+              <motion.span
+                key={f.id}
+                initial={{ opacity: 0, x: 0, y: 0, scale: 0.3, rotate: 0 }}
+                animate={{ opacity: [0, 1, 1, 0], x: f.x, y: f.y, scale: 1, rotate: f.rotate }}
+                transition={{ duration: 2.2, delay: f.delay, ease: "easeOut" }}
+                style={{ fontSize: f.size, position: "absolute" }}
+              >
+                🌻
+              </motion.span>
+            ))}
+          </div>
+        )}
         {showPresentAnimation && !presentOpened ? (
           /* Envelope Animation */
           <motion.div
@@ -149,7 +176,7 @@ const Index = () => {
                 className="rounded-2xl overflow-hidden shadow-lg mb-8"
               >
                 <video
-                  src="/apology-video.mp4"
+                  src={cheerupVideo.url}
                   autoPlay
                   loop
                   muted
@@ -165,9 +192,14 @@ const Index = () => {
                 transition={{ delay: 0.6 }}
                 className="text-center space-y-4"
               >
-                <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'hsl(340 30% 30%)' }}>
-                  Sorry that I sent you that reel that gave you the middle finger, I am very sorry:(
-                </p>
+                <div className="space-y-4 text-lg md:text-xl leading-relaxed" style={{ color: 'hsl(340 30% 30%)' }}>
+                  <p>Good Morning, or Good Afternoon, or Good Night. Ya know whenever your seeing this.</p>
+                  <p>I just wanted to say after these summative tests I know you're bummed out.</p>
+                  <p>I just wanted to say that you're doing great:)</p>
+                  <p>And that everything I said is true. You are a smart, beautiful and amazing person. So it sucks seeing you call yourself otherwise.:((</p>
+                  <p>We have the TERM Exams to look forward to, we have that as a chance to bawi namann.</p>
+                  <p>That's it, HASHDHASD byeeee</p>
+                </div>
                 <p className="font-semibold text-xl pt-4" style={{ color: 'hsl(340 50% 45%)' }}>
                   — 🙈
                 </p>
