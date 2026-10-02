@@ -1,7 +1,33 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import cheerupVideo from "@/assets/cheerup.mp4.asset.json";
+
+type Line = { text: string; gif?: { id: string; ratio: number } };
+const letter: Line[] = [
+  { text: "Hey, so here we are again. It's been a while right?", gif: { id: "16881194684291730255", ratio: 1.56028 } },
+  { text: "I know you have been a bit down recently, things have piled up on you and it had been really upsetting for you." },
+  { text: "I just want to let you know that, when a door closes another one opens." },
+  { text: "There are lots of opportunities out there still and I know you'll kill it there." },
+  { text: "Life can get stressful." },
+  { text: "And sometimes it feels like everything is falling out of our hands." },
+  { text: "And the fact that we can't control any of it is frustrating." },
+  { text: "But even when life can get that upsetting and frustrating, I know that your the type of person that can bounce back.", gif: { id: "20802161", ratio: 1 } },
+  { text: "In the past almost a year of talking to you, I have always thought that you were an amazingly strong person." },
+  { text: "Which is unfair really, because it's just made it impossible for me to not fall any more head over heels for you." },
+  { text: "Also can I just ramble on for a bit, because you are so great" },
+  { text: "It's kind of hard to just have in writing you know? But I have been all smiles since talking to you." },
+  { text: "You are soooo unbelievably kind, sweet admirably smart." },
+  { text: "I don't know if you're sick of it yet but you are sooo pretty." },
+  { text: "Whenever I re-read our conversation, and I see a photo of you I just melt", gif: { id: "15911150", ratio: 1 } },
+  { text: "You are that beautiful and cute" },
+  { text: "Seriously, what kind of spell do you have me under?" },
+  { text: "Anyways, I just wanted to compliment you, because well, I was hoping it would help cheer you up." },
+  { text: "I hope you know that, you've cheered me up from everything that has gotten me down recently." },
+  { text: "So, I want to do the same for you.", gif: { id: "26083121", ratio: 1.71123 } },
+  { text: "Life can be hard, maybe sharing some of it with me might ease it all." },
+  { text: "That's it, thank you for everything :))", gif: { id: "1217765935017775325", ratio: 1 } },
+];
+
 
 const Index = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -168,41 +194,29 @@ const Index = () => {
                 <Sparkles size={14} />
               </div>
 
-              {/* Video */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
-                className="rounded-2xl overflow-hidden shadow-lg mb-8"
-              >
-                <video
-                  src={cheerupVideo.url}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full"
-                />
-              </motion.div>
-
-              {/* Apology message */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="text-center space-y-4"
+                transition={{ delay: 0.4 }}
+                className="text-center space-y-4 text-lg md:text-xl leading-relaxed"
+                style={{ color: 'hsl(340 30% 30%)' }}
               >
-                <div className="space-y-4 text-lg md:text-xl leading-relaxed" style={{ color: 'hsl(340 30% 30%)' }}>
-                  <p>Good Morning, or Good Afternoon, or Good Night. Ya know whenever your seeing this.</p>
-                  <p>I just wanted to say after these summative tests I know you're bummed out.</p>
-                  <p>I just wanted to say that you're doing great:)</p>
-                  <p>And that everything I said is true. You are a smart, beautiful and amazing person. So it sucks seeing you call yourself otherwise.:((</p>
-                  <p>We have the TERM Exams to look forward to, we have that as a chance to bawi namann.</p>
-                  <p>That's it, HASHDHASD byeeee</p>
-                </div>
-                <p className="font-semibold text-xl pt-4" style={{ color: 'hsl(340 50% 45%)' }}>
-                  — 🙈
-                </p>
+                {letter.map((item, i) => (
+                  <div key={i} className="space-y-4">
+                    <p>{item.text}</p>
+                    {item.gif && (
+                      <div className="mx-auto max-w-xs rounded-2xl overflow-hidden shadow-lg">
+                        <iframe
+                          src={`https://tenor.com/embed/${item.gif.id}`}
+                          title="gif"
+                          className="w-full border-0"
+                          style={{ aspectRatio: String(item.gif.ratio) }}
+                          allowFullScreen
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
               </motion.div>
             </motion.div>
           </motion.div>
