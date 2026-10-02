@@ -203,22 +203,50 @@ const Index = () => {
                 className="text-center space-y-4 text-lg md:text-xl leading-relaxed"
                 style={{ color: 'hsl(340 30% 30%)' }}
               >
-                {letter.map((item, i) => (
-                  <div key={i} className="space-y-4">
-                    <p>{item.text}</p>
-                    {item.gif && (
-                      <div className="mx-auto max-w-xs rounded-2xl overflow-hidden shadow-lg">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={step}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.35 }}
+                    className="space-y-4 min-h-[6rem] flex flex-col justify-center"
+                  >
+                    <p>{letter[step].text}</p>
+                    {letter[step].gif && (
+                      <div className="mx-auto w-full max-w-xs rounded-2xl overflow-hidden shadow-lg">
                         <iframe
-                          src={`https://tenor.com/embed/${item.gif.id}`}
+                          src={`https://tenor.com/embed/${letter[step].gif!.id}`}
                           title="gif"
                           className="w-full border-0"
-                          style={{ aspectRatio: String(item.gif.ratio) }}
+                          style={{ aspectRatio: String(letter[step].gif!.ratio) }}
                           allowFullScreen
                         />
                       </div>
                     )}
-                  </div>
-                ))}
+                  </motion.div>
+                </AnimatePresence>
+                <div className="flex justify-center gap-3 pt-4">
+                  {step > 0 && (
+                    <button
+                      onClick={() => setStep(step - 1)}
+                      className="px-5 py-2 rounded-full text-base font-semibold shadow"
+                      style={{ background: 'hsl(340 50% 90%)', color: 'hsl(340 50% 40%)' }}
+                    >
+                      Back
+                    </button>
+                  )}
+                  {step < letter.length - 1 && (
+                    <button
+                      onClick={() => setStep(step + 1)}
+                      className="px-6 py-2 rounded-full text-base font-semibold shadow-lg"
+                      style={{ background: 'hsl(340 70% 65%)', color: 'white' }}
+                    >
+                      Next
+                    </button>
+                  )}
+                </div>
+                <p className="text-sm" style={{ color: 'hsl(340 30% 55%)' }}>{step + 1} / {letter.length}</p>
               </motion.div>
             </motion.div>
           </motion.div>
