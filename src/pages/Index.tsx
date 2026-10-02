@@ -250,6 +250,15 @@ const Index = () => {
                       Next
                     </button>
                   )}
+                  {step === letter.length - 1 && (
+                    <button
+                      onClick={() => { setPresentOpened(false); setStep(0); setSunflowers([]); }}
+                      className="px-6 py-2 rounded-full text-base font-semibold shadow-lg"
+                      style={{ background: 'hsl(340 70% 65%)', color: 'white' }}
+                    >
+                      Back to envelope
+                    </button>
+                  )}
                 </div>
                 <p className="text-sm" style={{ color: 'hsl(340 30% 55%)' }}>{step + 1} / {letter.length}</p>
               </motion.div>
