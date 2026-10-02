@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import bgMusic from "@/assets/bgmusic.mp3.asset.json";
 
 type Line = { text: string; gif?: { id: string; ratio: number } };
 const letter: Line[] = [
@@ -42,6 +43,7 @@ const Index = () => {
   }, []);
 
   const handleOpenPresent = () => {
+    const a = new Audio(bgMusic.url); a.loop = true; a.volume = 0.5; a.play().catch(() => {});
     setPresentOpened(true);
     setSunflowers(
       Array.from({ length: 24 }, (_, i) => ({
@@ -162,7 +164,7 @@ const Index = () => {
                 </div>
               </motion.div>
 
-              <p style={{ color: 'hsl(340 40% 50%)' }} className="mt-6 text-lg">hi po pakipindot</p>
+              <p style={{ color: 'hsl(340 40% 50%)' }} className="mt-6 text-lg">Pssst open it</p>
             </motion.div>
           </motion.div>
         ) : presentOpened ? (
