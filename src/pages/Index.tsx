@@ -34,6 +34,7 @@ const Index = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showPresentAnimation, setShowPresentAnimation] = useState(false);
   const [presentOpened, setPresentOpened] = useState(false);
+  const [step, setStep] = useState(0);
   const [sunflowers, setSunflowers] = useState<{ id: number; x: number; y: number; rotate: number; delay: number; size: number }[]>([]);
 
   // Already past the date, so unlock immediately
